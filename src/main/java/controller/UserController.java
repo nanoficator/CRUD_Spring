@@ -14,7 +14,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/admin/add")
+    @RequestMapping(value = "/admin/add", method = RequestMethod.GET)
     public ModelAndView addUser() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addPage");
