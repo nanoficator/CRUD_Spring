@@ -1,4 +1,4 @@
-package controller;
+package org.example.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,16 +8,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView allUsers() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("tablePage");
-        return modelAndView;
+    public ModelAndView authUser() {
+        return new ModelAndView("authPage");
     }
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.GET)
     public ModelAndView addUser() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("addPage");
-        return modelAndView;
+        return new ModelAndView("addPage");
     }
 }
