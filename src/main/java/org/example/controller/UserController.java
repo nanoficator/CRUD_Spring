@@ -16,4 +16,29 @@ public class UserController {
     public ModelAndView addUser() {
         return new ModelAndView("addPage");
     }
+
+    @RequestMapping(value = "/admin/delete", method = RequestMethod.GET)
+    public ModelAndView deleteUser() {
+        return new ModelAndView("deletePage");
+    }
+
+    @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
+    public ModelAndView editUser() {
+        return new ModelAndView("editPage");
+    }
+
+    @RequestMapping(value = "/admin/result", method = RequestMethod.GET)
+    public ModelAndView resultUser() {
+        return new ModelAndView("resultPage");
+    }
+
+    @RequestMapping(value = "/admin/table", method = RequestMethod.GET)
+    public ModelAndView tableUser() {
+        return new ModelAndView("tablePage");
+    }
+
+    @RequestMapping(value = "/user/info", method = RequestMethod.GET)
+    public ModelAndView infoUser() {
+        return new ModelAndView("infoPage");
+    }
 }
