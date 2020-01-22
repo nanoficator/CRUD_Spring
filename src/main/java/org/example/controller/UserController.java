@@ -9,36 +9,43 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView authUser() {
-        return new ModelAndView("authPage");
+        ModelAndView authPage = new ModelAndView("authPage");
+        return authPage;
     }
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.GET)
     public ModelAndView addUser() {
-        return new ModelAndView("addPage");
+        ModelAndView addPage = new ModelAndView("addPage");
+        return addPage;
     }
 
     @RequestMapping(value = "/admin/delete", method = RequestMethod.GET)
     public ModelAndView deleteUser() {
-        return new ModelAndView("deletePage");
+        ModelAndView deletePage = new ModelAndView("deletePage");
+        return deletePage;
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
     public ModelAndView editUser() {
-        return new ModelAndView("editPage");
+        ModelAndView editPage = new ModelAndView("editPage");
+        return editPage;
     }
 
     @RequestMapping(value = "/admin/result", method = RequestMethod.GET)
     public ModelAndView resultUser() {
-        return new ModelAndView("resultPage");
+        ModelAndView resultPage = new ModelAndView("resultPage");
+        return resultPage;
     }
 
     @RequestMapping(value = "/admin/table", method = RequestMethod.GET)
     public ModelAndView tableUser() {
-        return new ModelAndView("tablePage");
+        ModelAndView tablePage = new ModelAndView("tablePage");
+        return tablePage;
     }
 
     @RequestMapping(value = "/user/info", method = RequestMethod.GET)
     public ModelAndView infoUser() {
-        return new ModelAndView("infoPage");
+        ModelAndView infoPage = new ModelAndView("infoPage");
+        return infoPage;
     }
 }
