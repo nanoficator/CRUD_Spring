@@ -29,23 +29,19 @@ public class User {
     @Column
     private String gender;
 
-    @Column
-    private String role;
-
     public User(){
     }
 
-    public User(String firstName, String secondName, String userName, String password, Long age, String gender, String role) {
+    public User(String firstName, String secondName, String userName, String password, Long age, String gender) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.userName = userName;
         this.password = password;
         this.age = age;
         this.gender = gender;
-        this.role = role;
     }
 
-    public User(Long id, String firstName, String secondName, String userName, String password, Long age, String gender, String role) {
+    public User(Long id, String firstName, String secondName, String userName, String password, Long age, String gender) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -53,7 +49,6 @@ public class User {
         this.password = password;
         this.age = age;
         this.gender = gender;
-        this.role = role;
     }
 
     public Long getId() {
@@ -110,13 +105,5 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }

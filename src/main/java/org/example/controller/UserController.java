@@ -1,12 +1,23 @@
 package org.example.controller;
 
+import org.example.exception.DBException;
+import org.example.model.User;
+import org.example.service.UserService;
+import org.example.service.UserServiceFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class UserController {
+    private UserService userService = UserServiceFactory.getUserService();
+
+    public UserController() throws DBException {
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView authUser() {
         ModelAndView authPage = new ModelAndView("authPage");
@@ -38,8 +49,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/admin/table", method = RequestMethod.GET)
-    public ModelAndView tableUser() {
+    public ModelAndView tableUser() throws DBException {
+        List<User> allUsers = userService.getAllUsers();
         ModelAndView tablePage = new ModelAndView("tablePage");
+        tablePage.addObject("allUsers", allUsers);
         return tablePage;
     }
 
