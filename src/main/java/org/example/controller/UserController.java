@@ -1,10 +1,10 @@
 package org.example.controller;
 
-import org.example.exception.DBException;
 import org.example.model.User;
 import org.example.service.UserService;
 import org.example.service.UserServiceFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,9 +14,6 @@ import java.util.List;
 @Controller
 public class UserController {
     private UserService userService = UserServiceFactory.getUserService();
-
-    public UserController() throws DBException {
-    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView authPage() {
@@ -31,8 +28,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.GET)
-    public ModelAndView addUser() {
+    public ModelAndView addPage() {
         ModelAndView addPage = new ModelAndView("addPage");
+        return addPage;
+    }
+
+    @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
+    public ModelAndView addUser(@ModelAttribute("user") User user) {
+        userService.addUser(user);
+        ModelAndView addPage = new ModelAndView("addPage");
+        addPage.setViewName("redirect:/admin/table");
         return addPage;
     }
 
@@ -55,7 +60,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/admin/table", method = RequestMethod.GET)
-    public ModelAndView tableUser() throws DBException {
+    public ModelAndView tableUser() {
         List<User> allUsers = userService.getAllUsers();
         ModelAndView tablePage = new ModelAndView("tablePage");
         tablePage.addObject("allUsers", allUsers);

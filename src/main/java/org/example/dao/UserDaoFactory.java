@@ -1,6 +1,5 @@
 package org.example.dao;
 
-import org.example.exception.DBException;
 import org.example.util.DBHelper;
 
 import java.io.IOException;
@@ -9,7 +8,7 @@ import java.util.Properties;
 
 public class UserDaoFactory {
 
-    public static UserDao getDao() throws DBException {
+    public static UserDao getDao() {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         try (InputStream inputStream = loader.getResourceAsStream("config.properties")) {
             Properties properties = new Properties();
@@ -24,7 +23,7 @@ public class UserDaoFactory {
 
         } catch (IOException e) {
             e.printStackTrace();
-            throw new DBException(e);
+            return null;
         }
     }
 }
