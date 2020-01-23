@@ -19,6 +19,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView authPage() {
+        ModelAndView authPage = new ModelAndView("authPage");
+        return authPage;
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView authUser() {
         ModelAndView authPage = new ModelAndView("authPage");
         return authPage;

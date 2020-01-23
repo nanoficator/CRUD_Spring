@@ -12,5 +12,14 @@
 </head>
 <body>
 
+    <p>Are you sure to delete ${message}?</p>
+    <form action="/admin/delete/${id}" method="post">
+        <button>YES</button>
+    </form>
+
+    <form action="/admin/table" method="get">
+        <button>NO</button>
+    </form>
+
 </body>
 </html>

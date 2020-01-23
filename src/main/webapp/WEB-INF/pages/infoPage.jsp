@@ -12,5 +12,12 @@
 </head>
 <body>
 
+    <p>First Name: ${firstName}</p>
+    <p>Second Name: ${secondName}</p>
+    <p>Username: ${userName}</p>
+    <p>Age: ${age}</p>
+    <p>Gender: ${gender}</p>
+    <p>Role: ${role}</p>
+
 </body>
 </html>

@@ -12,5 +12,8 @@
 </head>
 <body>
 
+    <p>Message: ${message}</p>
+    <p><a href="/admin/table">Go to table</a></p>
+
 </body>
 </html>
