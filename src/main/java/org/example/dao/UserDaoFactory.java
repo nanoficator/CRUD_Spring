@@ -16,17 +16,15 @@ public class UserDaoFactory {
             properties.load(inputStream);
             String daoType = properties.getProperty("DAOType");
 
-            if (daoType.equalsIgnoreCase("hql")) {
+            if (daoType.equalsIgnoreCase("hibernate")) {
                 return new UserDaoHibernate(DBHelper.getInstance().getConfiguration());
             }
 
             return null;
 
         } catch (IOException e) {
-
             e.printStackTrace();
             throw new DBException(e);
-
         }
     }
 }
