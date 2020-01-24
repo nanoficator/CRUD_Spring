@@ -12,8 +12,8 @@
 </head>
 <body>
 
-<p>Are you sure to delete ${message}?</p>
-<form action="/admin/delete/${id}" method="post">
+<p>Are you sure to delete ${userName}?</p>
+<form action="/admin/delete?id=${id}" method="post">
     <button>YES</button>
 </form>
 

@@ -15,7 +15,7 @@
 <a href=/admin/table>Back to table</a>
 
 <form action="/admin/add/" method="post">
-    <p>First Name: <input  type="text" name="firstName" value="${user.firstName}" required></p>
+    <p>First Name: <input  type="text" name="firstName" value="${user.firstName}" required title="Input first name"></p>
     <p>Second Name: <input type="text" name="secondName" value="${user.secondName}" required></p>
     <p>Username: <input type="text" name="userName" value="${user.userName}" required></p>
     <p>Password: <input type="password" name="password" value="${user.password}" required></p>

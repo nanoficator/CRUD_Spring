@@ -27,6 +27,13 @@ public class UserController {
         return authPage;
     }
 
+    @RequestMapping(value = "/result", method = RequestMethod.GET)
+    public ModelAndView resultPage(@ModelAttribute("message") String message) {
+        ModelAndView resultPage = new ModelAndView("resultPage");
+        resultPage.addObject("message", message);
+        return resultPage;
+    }
+
     @RequestMapping(value = "/admin/add", method = RequestMethod.GET)
     public ModelAndView addPage() {
         ModelAndView addPage = new ModelAndView("addPage");
@@ -37,19 +44,49 @@ public class UserController {
     public ModelAndView addUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
         ModelAndView addPage = new ModelAndView("addPage");
-        addPage.setViewName("redirect:/admin/table");
+        addPage.addObject("message", "User " + user.getUserName() + " was added");
+        addPage.setViewName("redirect:/result");
         return addPage;
     }
 
     @RequestMapping(value = "/admin/delete", method = RequestMethod.GET)
-    public ModelAndView deleteUser() {
+    public ModelAndView deletePage(@ModelAttribute("id") Long id) {
+        User userForDelete = userService.getUserByID(id);
         ModelAndView deletePage = new ModelAndView("deletePage");
+        deletePage.addObject("id", id);
+        deletePage.addObject("userName", userForDelete.getUserName());
+        return deletePage;
+    }
+
+    @RequestMapping(value = "/admin/delete", method = RequestMethod.POST)
+    public ModelAndView deleteUser(@ModelAttribute("id") Long id) {
+        User userForDelete = userService.getUserByID(id);
+        userService.deleteUserById(id);
+        ModelAndView deletePage = new ModelAndView("deletePage");
+        deletePage.setViewName("redirect:/result");
+        deletePage.addObject("message", "User " + userForDelete.getUserName() + " was deleted");
         return deletePage;
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
-    public ModelAndView editUser() {
+    public ModelAndView editPage(@ModelAttribute("id") Long id) {
+        User userForEdit = userService.getUserByID(id);
         ModelAndView editPage = new ModelAndView("editPage");
+        editPage.addObject("user", userForEdit);
+        if (userForEdit.getGender().equalsIgnoreCase("male")) {
+            editPage.addObject("agender", "female");
+        } else {
+            editPage.addObject("agender", "male");
+        }
+        return editPage;
+    }
+
+    @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
+    public ModelAndView editUser(@ModelAttribute("user") User userChanged) {
+        userService.changeUser(userChanged);
+        ModelAndView editPage = new ModelAndView("editPage");
+        editPage.setViewName("redirect:/result");
+        editPage.addObject("message", "User " + userChanged.getUserName() + " was changed");
         return editPage;
     }
 
@@ -68,8 +105,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/info", method = RequestMethod.GET)
-    public ModelAndView infoUser() {
+    public ModelAndView infoPage(@ModelAttribute ("id") Long id) {
+        User user = userService.getUserByID(id);
         ModelAndView infoPage = new ModelAndView("infoPage");
+        if (user == null) {
+            infoPage.setViewName("redirect:/result");
+            infoPage.addObject("message", "Error: User with ID = " + id + " does not exist!");
+        } else {
+            infoPage.addObject("user", user);
+        }
         return infoPage;
     }
 }

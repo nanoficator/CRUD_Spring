@@ -13,7 +13,7 @@
 <body>
 
 <p>Message: ${message}</p>
-<p><a href="/admin/table">Go to main page</a></p>
+<p><a href="/admin/table">Go to table</a></p>
 
 </body>
 </html>

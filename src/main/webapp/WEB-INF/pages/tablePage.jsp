@@ -36,7 +36,7 @@
                     <td>${user.userName}</td>
                     <td>${user.age}</td>
                     <td>${user.gender}</td>
-                    <td><a href=/admin/delete/user?id=${user.id}>Remove</a> / <a href=/admin/edit/user?id=${user.id}>Edit</a> / <a href=/user/info/user?id=${user.id}>Info</a></td>
+                    <td><a href=/admin/delete?id=${user.id}>Delete</a> / <a href=/admin/edit?id=${user.id}>Edit</a> / <a href=/user/info?id=${user.id}>Info</a></td>
                 </tr>
                 </c:forEach>
             </table>
