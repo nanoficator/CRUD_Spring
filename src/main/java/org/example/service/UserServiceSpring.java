@@ -4,7 +4,6 @@ import org.example.dao.UserDao;
 import org.example.dao.UserDaoFactory;
 import org.example.model.User;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 

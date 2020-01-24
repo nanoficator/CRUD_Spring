@@ -3,11 +3,6 @@ package org.example.util;
 import org.example.model.User;
 import org.hibernate.cfg.Configuration;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 public class DBHelper {
 
     private static DBHelper dbHelper;
