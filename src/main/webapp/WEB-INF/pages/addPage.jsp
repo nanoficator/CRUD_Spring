@@ -22,8 +22,8 @@
     <p>Confirm password: <input type="password" name="confirmPassword" value="${user.password}" required></p>
     <p>Age: <input  type="number" name="age" value="${user.age}" required></p>
     <p>Gender:
-        <input type="radio" value="male" name="gender">Male
-        <input type="radio" value="female" name="gender">Female
+        <input type="radio" value="male" name="gender" required>Male
+        <input type="radio" value="female" name="gender" required>Female
     </p>
     <p>Create new user: <input type="submit" name="SUBMIT"></p>
 </form>

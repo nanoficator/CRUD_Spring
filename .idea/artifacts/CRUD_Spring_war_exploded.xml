@@ -22,6 +22,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.2.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.2.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:5.2.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:5.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
           <element id="library" level="project" name="Maven: tomcat:jsp-api:5.5.23" />
           <element id="library" level="project" name="Maven: tomcat:catalina:5.5.23" />
