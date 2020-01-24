@@ -60,11 +60,18 @@ public class UserController {
 
     @RequestMapping(value = "/admin/delete", method = RequestMethod.POST)
     public ModelAndView deleteUser(@ModelAttribute("id") Long id) {
-        User userForDelete = userService.getUserByID(id);
-        userService.deleteUserById(id);
         ModelAndView deletePage = new ModelAndView("deletePage");
-        deletePage.setViewName("redirect:/result");
-        deletePage.addObject("message", "User " + userForDelete.getUserName() + " was deleted");
+        if (id == 0) {
+            userService.deleteAllUsers();
+            deletePage.setViewName("redirect:/result");
+            deletePage.addObject("message", "All users were deleted!");
+        } else {
+            User userForDelete = userService.getUserByID(id);
+            userService.deleteUserById(id);
+
+            deletePage.setViewName("redirect:/result");
+            deletePage.addObject("message", "User " + userForDelete.getUserName() + " was deleted");
+        }
         return deletePage;
     }
 
