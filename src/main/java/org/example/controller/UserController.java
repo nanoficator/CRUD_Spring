@@ -22,7 +22,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView authUser() {
+    public ModelAndView authUser(@ModelAttribute ("userName") String userName, @ModelAttribute ("password") String password) {
+        User user = userService.getUserByUserName(userName);
         ModelAndView authPage = new ModelAndView("authPage");
         return authPage;
     }
@@ -42,19 +43,33 @@ public class UserController {
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
     public ModelAndView addUser(@ModelAttribute("user") User user) {
-        userService.addUser(user);
+        String result = userService.addUser(user);
         ModelAndView addPage = new ModelAndView("addPage");
-        addPage.addObject("message", "User " + user.getUserName() + " was added");
+        if (result.contains("Error:")) {
+            addPage.addObject("message", result);
+        } else {
+            addPage.addObject("message", "User " + user.getUserName() + " was added");
+        }
         addPage.setViewName("redirect:/result");
         return addPage;
     }
 
     @RequestMapping(value = "/admin/delete", method = RequestMethod.GET)
     public ModelAndView deletePage(@ModelAttribute("id") Long id) {
-        User userForDelete = userService.getUserByID(id);
         ModelAndView deletePage = new ModelAndView("deletePage");
-        deletePage.addObject("id", id);
-        deletePage.addObject("userName", userForDelete.getUserName());
+        if (id == 0) {
+            deletePage.addObject("id", id);
+            deletePage.addObject("userName", "all users");
+        } else {
+            User userForDelete = userService.getUserByID(id);
+            if (userForDelete == null) {
+                deletePage.addObject("message", "Error: User does not exist!");
+                deletePage.setViewName("redirect:/result");
+            } else {
+                deletePage.addObject("id", id);
+                deletePage.addObject("userName", userForDelete.getUserName());
+            }
+        }
         return deletePage;
     }
 
@@ -63,15 +78,17 @@ public class UserController {
         ModelAndView deletePage = new ModelAndView("deletePage");
         if (id == 0) {
             userService.deleteAllUsers();
-            deletePage.setViewName("redirect:/result");
             deletePage.addObject("message", "All users were deleted!");
         } else {
             User userForDelete = userService.getUserByID(id);
-            userService.deleteUserById(id);
-
-            deletePage.setViewName("redirect:/result");
-            deletePage.addObject("message", "User " + userForDelete.getUserName() + " was deleted");
+            String result = userService.deleteUserById(id);
+            if (result.contains("Error:")) {
+                deletePage.addObject("message", result);
+            } else {
+                deletePage.addObject("message", "User " + userForDelete.getUserName() + " was deleted");
+            }
         }
+        deletePage.setViewName("redirect:/result");
         return deletePage;
     }
 
@@ -90,10 +107,14 @@ public class UserController {
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
     public ModelAndView editUser(@ModelAttribute("user") User userChanged) {
-        userService.changeUser(userChanged);
+        String result = userService.changeUser(userChanged);
         ModelAndView editPage = new ModelAndView("editPage");
+        if (result.contains("Error:")) {
+            editPage.addObject("message", result);
+        } else {
+            editPage.addObject("message", "User " + userChanged.getUserName() + " was changed");
+        }
         editPage.setViewName("redirect:/result");
-        editPage.addObject("message", "User " + userChanged.getUserName() + " was changed");
         return editPage;
     }
 
