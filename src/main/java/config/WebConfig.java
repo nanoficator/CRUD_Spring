@@ -1,5 +1,6 @@
 package config;
 
+import controller.UserController;
 import dao.UserDao;
 import dao.UserDaoHibernate;
 
@@ -15,6 +16,7 @@ import util.DBHelper;
 
 @Configuration
 @EnableWebMvc
+@ComponentScan
 public class WebConfig {
     @Bean
     ViewResolver viewResolver() {
@@ -22,6 +24,11 @@ public class WebConfig {
         viewResolver.setPrefix("/WEB-INF/pages/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
+    }
+
+    @Bean
+    UserController userController() {
+        return new UserController();
     }
 
     @Bean
