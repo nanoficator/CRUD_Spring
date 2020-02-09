@@ -1,8 +1,8 @@
-package org.example.controller;
+package controller;
 
-import org.example.model.User;
-import org.example.service.UserService;
-import org.example.service.UserServiceFactory;
+import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +13,8 @@ import java.util.List;
 
 @Controller
 public class UserController {
-    private UserService userService = UserServiceFactory.getUserService();
-
+    @Autowired
+    UserService userService;
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView authPage() {
         ModelAndView authPage = new ModelAndView("authPage");
@@ -23,6 +23,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView authUser(@ModelAttribute ("userName") String userName, @ModelAttribute ("password") String password) {
+
         User user = userService.getUserByUserName(userName);
         ModelAndView authPage = new ModelAndView("authPage");
         return authPage;

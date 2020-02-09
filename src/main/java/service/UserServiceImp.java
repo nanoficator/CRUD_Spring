@@ -1,17 +1,18 @@
-package org.example.service;
+package service;
 
-import org.example.dao.UserDao;
-import org.example.dao.UserDaoFactory;
-import org.example.model.User;
+import dao.UserDao;
+import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserServiceSpring implements UserService {
+public class UserServiceImp implements UserService {
+    @Autowired
+    UserDao dao;
 
     @Override
     public List<User> getAllUsers() {
-        UserDao dao = UserDaoFactory.getDao();
         try {
             return dao.getAllData();
         } catch (SQLException e) {
@@ -22,7 +23,6 @@ public class UserServiceSpring implements UserService {
 
     @Override
     public void deleteAllUsers() {
-        UserDao dao = UserDaoFactory.getDao();
         try {
             dao.deleteAllData();
         } catch (SQLException e) {
@@ -32,7 +32,6 @@ public class UserServiceSpring implements UserService {
 
     @Override
     public boolean isExistUserName(String userName) {
-        UserDao dao = UserDaoFactory.getDao();
         try{
             User userFromDB = dao.getDataByUserName(userName);
             if (userFromDB != null) {
@@ -47,7 +46,6 @@ public class UserServiceSpring implements UserService {
 
     @Override
     public User getUserByID(Long id) {
-        UserDao dao = UserDaoFactory.getDao();
         try {
             return dao.getDataByID(id);
         } catch (SQLException e) {
@@ -58,7 +56,6 @@ public class UserServiceSpring implements UserService {
 
     @Override
     public User getUserByUserName(String userName) {
-        UserDao dao = UserDaoFactory.getDao();
         try {
             return dao.getDataByUserName(userName);
         } catch (SQLException e) {
@@ -78,7 +75,6 @@ public class UserServiceSpring implements UserService {
             return "Error: Age can not be negative!";
         }
 
-        UserDao dao = UserDaoFactory.getDao();
         try {
             dao.addData(user);
             return "User was added!";
@@ -97,7 +93,6 @@ public class UserServiceSpring implements UserService {
             return "Error: User does not exist!";
         }
 
-        UserDao dao = UserDaoFactory.getDao();
         try {
             dao.deleteData(userFromDB);
             return "User was deleted!";
@@ -115,7 +110,6 @@ public class UserServiceSpring implements UserService {
             return "Error: User does not exist!";
         }
 
-        UserDao dao = UserDaoFactory.getDao();
         try {
             dao.deleteData(userFromDB);
             return "User was deleted!";
@@ -160,7 +154,6 @@ public class UserServiceSpring implements UserService {
             return "Error: Age can not be negative!";
         }
 
-        UserDao dao = UserDaoFactory.getDao();
         try {
             dao.changeFirstName(id, newFirstName);
             dao.changeSecondName(id, newSecondName);

@@ -1,18 +1,9 @@
-package org.example.util;
+package util;
 
-import org.example.model.User;
+import model.User;
 import org.hibernate.cfg.Configuration;
 
 public class DBHelper {
-
-    private static DBHelper dbHelper;
-
-    public static DBHelper getInstance() {
-        if(dbHelper == null) {
-            dbHelper = new DBHelper();
-        }
-        return dbHelper;
-    }
 
     public Configuration getConfiguration() {
         Configuration configuration = new Configuration();
