@@ -15,6 +15,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView authPage() {
         ModelAndView authPage = new ModelAndView("authPage");

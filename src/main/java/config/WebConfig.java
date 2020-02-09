@@ -15,7 +15,6 @@ import util.DBHelper;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan
 public class WebConfig {
     @Bean
     ViewResolver viewResolver() {
