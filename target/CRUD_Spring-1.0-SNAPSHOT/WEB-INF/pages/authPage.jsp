@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form action="/login" method="post">
+<form action="/admin/table" method="post">
     <p>Username: <input type="text" name="userName" required></p>
     <p>Password: <input type="password" name="password" required></p>
     <p><input type="submit" value="SIGN IN"></p>
