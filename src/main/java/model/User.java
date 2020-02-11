@@ -8,20 +8,20 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column (name = "user_id")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "userName")
+    @Column
     private String userName;
 
-    @Column (name = "password")
+    @Column
     private String password;
 
     @Transient
     private String confirmPassword;
 
-    @Column (name = "roles")
+    @Column
     @ManyToMany
     @JoinTable (name = "roles",
             joinColumns = @JoinColumn (name = "user_id"),
