@@ -21,9 +21,11 @@ public class User {
     @Transient
     private String confirmPassword;
 
-    @Column
+    @Column (name = "roles")
     @ManyToMany
-    @JoinTable (name = "roles", joinColumns = @JoinColumn (name = "user_id"), inverseJoinColumns = @JoinColumn (name = "role_id"))
+    @JoinTable (name = "roles",
+            joinColumns = @JoinColumn (name = "user_id"),
+            inverseJoinColumns = @JoinColumn (name = "role_id"))
     private Set<Role> roles;
 
     public User() {

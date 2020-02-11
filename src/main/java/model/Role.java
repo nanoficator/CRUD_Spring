@@ -6,17 +6,20 @@ import java.util.Set;
 @Entity
 @Table (name = "roles")
 public class Role {
+
     @Id
     @Column (name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "roleName")
-    private String roleName;
+    @Column (name = "name")
+    private String name;
 
     @Column (name = "users")
     @ManyToMany
-    @JoinTable (name = "users", joinColumns = @JoinColumn (name = "role_id"), inverseJoinColumns = @JoinColumn (name = "user_id"))
+    @JoinTable (name = "users",
+            joinColumns = @JoinColumn (name = "role_id"),
+            inverseJoinColumns = @JoinColumn (name = "user_id"))
     private Set<User> users;
 
     public Role() {
@@ -31,11 +34,11 @@ public class Role {
     }
 
     public String getRoleName() {
-        return roleName;
+        return name;
     }
 
     public void setRoleName(String roleName) {
-        this.roleName = roleName;
+        this.name = roleName;
     }
 
     public Set<User> getUsers() {

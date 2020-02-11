@@ -21,21 +21,13 @@
 
                 <tr>
                     <th>ID</th>
-                    <th>First Name</th>
-                    <th>Second Name</th>
                     <th>Username</th>
-                    <th>Age</th>
-                    <th>Gender</th>
                     <th>Options</th>
                 </tr>
                 <c:forEach var="user" items="${allUsers}">
                 <tr>
                     <td>${user.id}</td>
-                    <td>${user.firstName}</td>
-                    <td>${user.secondName}</td>
                     <td>${user.userName}</td>
-                    <td>${user.age}</td>
-                    <td>${user.gender}</td>
                     <td><a href=/admin/delete?id=${user.id}>Delete</a> / <a href=/admin/edit?id=${user.id}>Edit</a> / <a href=/user/info?id=${user.id}>Info</a></td>
                 </tr>
                 </c:forEach>
