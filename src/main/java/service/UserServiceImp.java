@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImp implements UserService {
+
     @Autowired
     UserDao dao;
 
@@ -71,10 +72,6 @@ public class UserServiceImp implements UserService {
             return "Error: Username exists!";
         }
 
-        if (user.getAge() < 0) {
-            return "Error: Age can not be negative!";
-        }
-
         try {
             dao.addData(user);
             return "User was added!";
@@ -84,25 +81,7 @@ public class UserServiceImp implements UserService {
         }
     }
 
-    @Override
-    public String deleteUser(User user) {
-
-        User userFromDB = getUserByUserName(user.getUserName());
-
-        if (userFromDB == null) {
-            return "Error: User does not exist!";
-        }
-
-        try {
-            dao.deleteData(userFromDB);
-            return "User was deleted!";
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "Error: SQL Exception!";
-        }
-    }
-
-    public String deleteUserById(Long id) {
+    public String deleteUser(Long id) {
 
         User userFromDB = getUserByID(id);
 
@@ -122,12 +101,8 @@ public class UserServiceImp implements UserService {
     public String changeUser(User changedUser) {
 
         Long id = changedUser.getId();
-        String newFirstName = changedUser.getFirstName();
-        String newSecondName = changedUser.getSecondName();
         String newUserName = changedUser.getUserName();
         String newPassword = changedUser.getPassword();
-        Long newAge = changedUser.getAge();
-        String newGender = changedUser.getGender();
 
         User userFromDBById = getUserByID(id);
         User userFromDBByUserName = getUserByUserName(newUserName);
@@ -136,13 +111,7 @@ public class UserServiceImp implements UserService {
             return "Error: User does not exist!";
         }
 
-        if (id == null ||
-                newFirstName.equals("") ||
-                newSecondName.equals("") ||
-                newUserName.equals("") ||
-                newPassword.equals("") ||
-                newAge == null ||
-                newGender.equals("")) {
+        if (id == null ||newUserName.equals("") || newPassword.equals("")) {
             return "Error: All fields are required!";
         }
 
@@ -150,17 +119,9 @@ public class UserServiceImp implements UserService {
             return "Error: Username exists!";
         }
 
-        if (newAge < 0) {
-            return "Error: Age can not be negative!";
-        }
-
         try {
-            dao.changeFirstName(id, newFirstName);
-            dao.changeSecondName(id, newSecondName);
             dao.changeUserName(id, newUserName);
             dao.changePassword(id, newPassword);
-            dao.changeAge(id, newAge);
-            dao.changeGender(id, newGender);
             return "Changes saved!";
         } catch (SQLException e) {
             e.printStackTrace();

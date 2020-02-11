@@ -96,30 +96,6 @@ public class UserDaoHibernate implements UserDao {
     }
 
     @Override
-    public void changeFirstName(Long id, String newFirstName) {
-        Session session = getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("UPDATE User SET firstName = :firstName WHERE id = :id");
-        query.setParameter("firstName", newFirstName);
-        query.setParameter("id", id);
-        query.executeUpdate();
-        transaction.commit();
-        session.close();
-    }
-
-    @Override
-    public void changeSecondName(Long id, String newSecondName) {
-        Session session = getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("UPDATE User SET secondName = :secondName WHERE id = :id");
-        query.setParameter("secondName", newSecondName);
-        query.setParameter("id", id);
-        query.executeUpdate();
-        transaction.commit();
-        session.close();
-    }
-
-    @Override
     public void changeUserName(Long id, String newUserName) {
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
@@ -143,27 +119,4 @@ public class UserDaoHibernate implements UserDao {
         session.close();
     }
 
-    @Override
-    public void changeAge(Long id, Long newAge) {
-        Session session = getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("UPDATE User SET age = :age WHERE id = :id");
-        query.setParameter("age", newAge);
-        query.setParameter("id", id);
-        query.executeUpdate();
-        transaction.commit();
-        session.close();
-    }
-
-    @Override
-    public void changeGender(Long id, String newGender) {
-        Session session = getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("UPDATE User SET gender = :gender WHERE id = :id");
-        query.setParameter("gender", newGender);
-        query.setParameter("id", id);
-        query.executeUpdate();
-        transaction.commit();
-        session.close();
-    }
 }

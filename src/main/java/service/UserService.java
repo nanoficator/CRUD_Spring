@@ -5,6 +5,7 @@ import model.User;
 import java.util.List;
 
 public interface UserService {
+
     public List<User> getAllUsers();
 
     public void deleteAllUsers();
@@ -17,9 +18,7 @@ public interface UserService {
 
     public String addUser(User user);
 
-    public String deleteUser(User user);
-
-    public String deleteUserById(Long id);
+    public String deleteUser(Long id);
 
     public String changeUser(User changedUser);
 }

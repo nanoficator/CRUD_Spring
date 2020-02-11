@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView authPage() {
         ModelAndView authPage = new ModelAndView("authPage");
         return authPage;
@@ -24,7 +24,6 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView authUser(@ModelAttribute ("userName") String userName, @ModelAttribute ("password") String password) {
-
         User user = userService.getUserByUserName(userName);
         ModelAndView authPage = new ModelAndView("authPage");
         return authPage;
@@ -83,7 +82,7 @@ public class UserController {
             deletePage.addObject("message", "All users were deleted!");
         } else {
             User userForDelete = userService.getUserByID(id);
-            String result = userService.deleteUserById(id);
+            String result = userService.deleteUser(id);
             if (result.contains("Error:")) {
                 deletePage.addObject("message", result);
             } else {
@@ -99,11 +98,6 @@ public class UserController {
         User userForEdit = userService.getUserByID(id);
         ModelAndView editPage = new ModelAndView("editPage");
         editPage.addObject("user", userForEdit);
-        if (userForEdit.getGender().equalsIgnoreCase("male")) {
-            editPage.addObject("agender", "female");
-        } else {
-            editPage.addObject("agender", "male");
-        }
         return editPage;
     }
 

@@ -1,54 +1,32 @@
 package model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table (name = "users")
 public class User {
 
     @Id
-    @Column (name = "id")
+    @Column (name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "first_name")
-    private String firstName;
-
-    @Column (name = "second_name")
-    private String secondName;
-
-    @Column (name = "user_name")
+    @Column (name = "userName")
     private String userName;
 
-    @Column
+    @Column (name = "password")
     private String password;
 
-    @Column
-    private Long age;
+    @Transient
+    private String confirmPassword;
 
     @Column
-    private String gender;
+    @ManyToMany
+    @JoinTable (name = "roles", joinColumns = @JoinColumn (name = "user_id"), inverseJoinColumns = @JoinColumn (name = "role_id"))
+    private Set<Role> roles;
 
-    public User(){
-    }
-
-    public User(String firstName, String secondName, String userName, String password, Long age, String gender) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.userName = userName;
-        this.password = password;
-        this.age = age;
-        this.gender = gender;
-    }
-
-    public User(Long id, String firstName, String secondName, String userName, String password, Long age, String gender) {
-        this.id = id;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.userName = userName;
-        this.password = password;
-        this.age = age;
-        this.gender = gender;
+    public User() {
     }
 
     public Long getId() {
@@ -57,22 +35,6 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
     }
 
     public String getUserName() {
@@ -91,19 +53,19 @@ public class User {
         this.password = password;
     }
 
-    public Long getAge() {
-        return age;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setAge(Long age) {
-        this.age = age;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
-    public String getGender() {
-        return gender;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
