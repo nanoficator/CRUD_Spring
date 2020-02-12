@@ -12,6 +12,7 @@ import org.hibernate.service.ServiceRegistry;
 import java.util.List;
 
 public class UserDaoHibernate implements UserDao {
+
     private static Configuration configuration;
 
     public UserDaoHibernate(Configuration configuration) {
@@ -84,11 +85,11 @@ public class UserDaoHibernate implements UserDao {
     }
 
     @Override
-    public User getDataByUserName(String userName) {
+    public User getDataByUsername(String username) {
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("FROM User WHERE user_name = :user_name");
-        query.setParameter("user_name", userName);
+        query.setParameter("user_name", username);
         User userFromDB = (User) query.uniqueResult();
         transaction.commit();
         session.close();
@@ -96,11 +97,11 @@ public class UserDaoHibernate implements UserDao {
     }
 
     @Override
-    public void changeUserName(Long id, String newUserName) {
+    public void changeUsername(Long id, String newUsername) {
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("UPDATE User SET userName = :newUserName WHERE id = :id");
-        query.setParameter("newUserName", newUserName);
+        query.setParameter("newUserName", newUsername);
         query.setParameter("id", id);
         query.executeUpdate();
         transaction.commit();

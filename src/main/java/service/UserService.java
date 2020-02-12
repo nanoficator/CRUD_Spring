@@ -10,11 +10,11 @@ public interface UserService {
 
     public void deleteAllUsers();
 
-    public boolean isExistUserName(String userName);
+    public boolean isExistUsername(String username);
 
     public User getUserByID(Long id);
 
-    public User getUserByUserName(String userName);
+    public User getUserByUsername(String username);
 
     public String addUser(User user);
 

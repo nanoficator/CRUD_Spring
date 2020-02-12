@@ -32,9 +32,9 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public boolean isExistUserName(String userName) {
+    public boolean isExistUsername(String username) {
         try{
-            User userFromDB = dao.getDataByUserName(userName);
+            User userFromDB = dao.getDataByUsername(username);
             if (userFromDB != null) {
                 return true;
             }
@@ -56,9 +56,9 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User getUserByUserName(String userName) {
+    public User getUserByUsername(String username) {
         try {
-            return dao.getDataByUserName(userName);
+            return dao.getDataByUsername(username);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -68,7 +68,7 @@ public class UserServiceImp implements UserService {
     @Override
     public String addUser(User user) {
 
-        if (isExistUserName(user.getUsername())) {
+        if (isExistUsername(user.getUsername())) {
             return "Error: Username exists!";
         }
 
@@ -105,7 +105,7 @@ public class UserServiceImp implements UserService {
         String newPassword = changedUser.getPassword();
 
         User userFromDBById = getUserByID(id);
-        User userFromDBByUserName = getUserByUserName(newUserName);
+        User userFromDBByUserName = getUserByUsername(newUserName);
 
         if (userFromDBById == null) {
             return "Error: User does not exist!";
@@ -120,7 +120,7 @@ public class UserServiceImp implements UserService {
         }
 
         try {
-            dao.changeUserName(id, newUserName);
+            dao.changeUsername(id, newUserName);
             dao.changePassword(id, newPassword);
             return "Changes saved!";
         } catch (SQLException e) {

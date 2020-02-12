@@ -17,9 +17,9 @@ public interface UserDao {
 
     User getDataByID(Long id) throws SQLException;
 
-    User getDataByUserName(String userName) throws SQLException;
+    User getDataByUsername(String username) throws SQLException;
 
-    void changeUserName(Long id, String newUserName) throws SQLException;
+    void changeUsername(Long id, String newUsername) throws SQLException;
 
     void changePassword(Long id, String newPassword) throws SQLException;
 

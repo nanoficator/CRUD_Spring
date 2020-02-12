@@ -13,6 +13,7 @@ import java.util.List;
 
 @Controller
 public class UserController {
+
     @Autowired
     UserService userService;
 
@@ -24,7 +25,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView authUser(@ModelAttribute ("userName") String userName, @ModelAttribute ("password") String password) {
-        User user = userService.getUserByUserName(userName);
+        User user = userService.getUserByUsername(userName);
         ModelAndView authPage = new ModelAndView("authPage");
         return authPage;
     }
