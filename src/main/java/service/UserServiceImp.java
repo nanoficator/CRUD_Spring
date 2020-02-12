@@ -68,7 +68,7 @@ public class UserServiceImp implements UserService {
     @Override
     public String addUser(User user) {
 
-        if (isExistUserName(user.getUserName())) {
+        if (isExistUserName(user.getUsername())) {
             return "Error: Username exists!";
         }
 
@@ -101,7 +101,7 @@ public class UserServiceImp implements UserService {
     public String changeUser(User changedUser) {
 
         Long id = changedUser.getId();
-        String newUserName = changedUser.getUserName();
+        String newUserName = changedUser.getUsername();
         String newPassword = changedUser.getPassword();
 
         User userFromDBById = getUserByID(id);

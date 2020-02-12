@@ -49,7 +49,7 @@ public class UserController {
         if (result.contains("Error:")) {
             addPage.addObject("message", result);
         } else {
-            addPage.addObject("message", "User " + user.getUserName() + " was added");
+            addPage.addObject("message", "User " + user.getUsername() + " was added");
         }
         addPage.setViewName("redirect:/result");
         return addPage;
@@ -68,7 +68,7 @@ public class UserController {
                 deletePage.setViewName("redirect:/result");
             } else {
                 deletePage.addObject("id", id);
-                deletePage.addObject("userName", userForDelete.getUserName());
+                deletePage.addObject("userName", userForDelete.getUsername());
             }
         }
         return deletePage;
@@ -86,7 +86,7 @@ public class UserController {
             if (result.contains("Error:")) {
                 deletePage.addObject("message", result);
             } else {
-                deletePage.addObject("message", "User " + userForDelete.getUserName() + " was deleted");
+                deletePage.addObject("message", "User " + userForDelete.getUsername() + " was deleted");
             }
         }
         deletePage.setViewName("redirect:/result");
@@ -108,7 +108,7 @@ public class UserController {
         if (result.contains("Error:")) {
             editPage.addObject("message", result);
         } else {
-            editPage.addObject("message", "User " + userChanged.getUserName() + " was changed");
+            editPage.addObject("message", "User " + userChanged.getUsername() + " was changed");
         }
         editPage.setViewName("redirect:/result");
         return editPage;
