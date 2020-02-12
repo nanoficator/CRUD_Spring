@@ -1,5 +1,6 @@
 package model;
 
+import javax.crypto.Mac;
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,11 +16,7 @@ public class Role {
     @Column
     private String name;
 
-    @Column
-    @ManyToMany
-    @JoinTable (name = "user_roles",
-            joinColumns = @JoinColumn (name = "role_id"),
-            inverseJoinColumns = @JoinColumn (name = "user_id"))
+    @ManyToMany (mappedBy = "roles")
     private Set<User> users;
 
     public Role() {

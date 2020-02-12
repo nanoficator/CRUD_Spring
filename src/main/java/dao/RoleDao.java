@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RoleDao {
 
-    List<User> getAllData() throws SQLException;
+    List<Role> getAllData() throws SQLException;
 
     void deleteAllData() throws SQLException;
 
@@ -16,10 +16,9 @@ public interface RoleDao {
 
     void deleteData(Role role) throws SQLException;
 
-    User getDataByID(Long id) throws SQLException;
+    Role getDataByID(Long id) throws SQLException;
 
-    User getDataByName(String name) throws SQLException;
+    Role getDataByName(String name) throws SQLException;
 
     void changeName(Long id, String newName) throws SQLException;
-
 }

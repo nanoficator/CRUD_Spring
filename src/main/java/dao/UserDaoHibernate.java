@@ -88,8 +88,8 @@ public class UserDaoHibernate implements UserDao {
     public User getDataByUsername(String username) {
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("FROM User WHERE user_name = :user_name");
-        query.setParameter("user_name", username);
+        Query query = session.createQuery("FROM User WHERE username = :username");
+        query.setParameter("username", username);
         User userFromDB = (User) query.uniqueResult();
         transaction.commit();
         session.close();
@@ -100,8 +100,8 @@ public class UserDaoHibernate implements UserDao {
     public void changeUsername(Long id, String newUsername) {
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("UPDATE User SET userName = :newUserName WHERE id = :id");
-        query.setParameter("newUserName", newUsername);
+        Query query = session.createQuery("UPDATE User SET username = :newUsername WHERE id = :id");
+        query.setParameter("newUsername", newUsername);
         query.setParameter("id", id);
         query.executeUpdate();
         transaction.commit();
