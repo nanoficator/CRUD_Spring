@@ -1,6 +1,5 @@
 package model;
 
-import javax.crypto.Mac;
 import javax.persistence.*;
 import java.util.Set;
 
