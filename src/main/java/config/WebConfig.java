@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import service.RoleService;
+import service.RoleServiceImpl;
 import service.UserService;
 import service.UserServiceImp;
 import util.DBHelper;
@@ -49,5 +51,10 @@ public class WebConfig {
     @Bean
     UserService userService() {
         return new UserServiceImp();
+    }
+
+    @Bean
+    RoleService roleService() {
+        return new RoleServiceImpl();
     }
 }

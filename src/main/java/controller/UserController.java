@@ -1,7 +1,9 @@
 package controller;
 
+import model.Role;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import service.RoleService;
 import service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,13 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RoleService roleService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView authPage() {
