@@ -72,6 +72,10 @@ public class UserServiceImp implements UserService {
             return "Error: Username exists!";
         }
 
+        if (!user.getPassword().equals(user.getConfirmPassword())) {
+            return "Error: Passwords do not match!";
+        }
+
         try {
             dao.addData(user);
             return "User was added!";

@@ -29,7 +29,7 @@
                 <tr>
                     <td>${user.id}</td>
                     <td>${user.username}</td>
-                    <td>${user.roles}</td>
+                    <td></td>
                     <td><a href=/admin/delete?id=${user.id}>Delete</a> / <a href=/admin/edit?id=${user.id}>Edit</a> / <a href=/user/info?id=${user.id}>Info</a></td>
                 </tr>
                 </c:forEach>

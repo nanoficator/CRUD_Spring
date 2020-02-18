@@ -15,10 +15,12 @@
 <a href=/admin/table>Back to table</a>
 
 <form action="/admin/add/" method="post">
-    <p>Username: <input type="text" name="userName" value="${user.username}" required></p>
+    <p>Username: <input type="text" name="username" value="${user.username}" required></p>
     <p>Password: <input type="password" name="password" value="${user.password}" required></p>
     <p>Confirm password: <input type="password" name="confirmPassword" value="${user.confirmPassword}" required></p>
-    <p>Create new user: <input type="submit" name="SUBMIT"></p>
+    <p>Role: <input type="checkbox" name="roles1" value="${user.roles.add(roleService.getRoleByID(1))}">ADMIN
+        <input type="checkbox" name="roles2" value="${user.roles.add(roleService.getRoleByID(2))}">USER</p>
+    <p>Create new user: <input type="submit" name="SUBMIT">
 </form>
 
 </body>

@@ -21,9 +21,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    RoleService roleService;
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView authPage() {
         ModelAndView authPage = new ModelAndView("authPage");
@@ -51,7 +48,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute("user") User user) {
+    public ModelAndView addUser(@ModelAttribute("user") User user,
+                                @ModelAttribute("roleService") @Autowired RoleService roleService) {
         String result = userService.addUser(user);
         ModelAndView addPage = new ModelAndView("addPage");
         if (result.contains("Error:")) {

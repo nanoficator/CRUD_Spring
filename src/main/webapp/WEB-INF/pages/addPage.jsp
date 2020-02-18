@@ -18,9 +18,8 @@
     <p>Username: <input type="text" name="username" value="${user.username}" required></p>
     <p>Password: <input type="password" name="password" value="${user.password}" required></p>
     <p>Confirm password: <input type="password" name="confirmPassword" value="${user.confirmPassword}" required></p>
-    <p>Role: <input type="checkbox" name="roles1" value="${user.roles.add({ro})}">USER
-        <input type="checkbox" name="roles2" value="${user.roles.add("ROLE_ADMIN")}">ADMIN</p>
-    <input type="checkbox" name="roles2" value="${rol}">
+    <p>Role: <input type="checkbox" name="roles1" value="${user.roles.add(roleService.getRoleByID(1))}">ADMIN
+        <input type="checkbox" name="roles2" value="${user.roles.add(roleService.getRoleByID(2))}">USER</p>
     <p>Create new user: <input type="submit" name="SUBMIT">
 </form>
 
