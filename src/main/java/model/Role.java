@@ -8,14 +8,14 @@ import java.util.Set;
 public class Role {
 
     @Id
-    @Column
+    @Column (name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
     private String name;
 
-    @ManyToMany (mappedBy = "roles")
+    @OneToMany (mappedBy = "role")
     private Set<User> users;
 
     public Role() {

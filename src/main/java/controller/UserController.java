@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Controller
 public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RoleService roleService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView authPage() {
@@ -48,8 +50,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute("user") User user,
-                                @ModelAttribute("roleService") @Autowired RoleService roleService) {
+    public ModelAndView addUser(@ModelAttribute("user") User user) {
         String result = userService.addUser(user);
         ModelAndView addPage = new ModelAndView("addPage");
         if (result.contains("Error:")) {

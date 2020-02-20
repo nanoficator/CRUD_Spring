@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -8,7 +9,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column
+    @Column (name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -21,12 +22,9 @@ public class User {
     @Transient
     private String confirmPassword;
 
-    @Column
-    @ManyToMany
-    @JoinTable (name = "user_roles",
-            joinColumns = @JoinColumn (name = "user_id"),
-            inverseJoinColumns = @JoinColumn (name = "role_id"))
-    private Set<Role> roles;
+    @ManyToOne
+    @JoinTable (name = "roles", inverseJoinColumns = @JoinColumn (name = "role_id"))
+    private Role role;
 
     public User() {
     }
@@ -63,11 +61,11 @@ public class User {
         this.confirmPassword = confirmPassword;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
