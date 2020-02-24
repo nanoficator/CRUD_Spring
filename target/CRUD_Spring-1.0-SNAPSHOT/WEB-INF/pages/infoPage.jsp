@@ -13,7 +13,9 @@
 <body>
 
 <p>ID: ${user.id}</p>
-<p>Username: ${user.userName}</p>
+<p>Username: ${user.username}</p>
+<p>ID: ${user.id}</p>
+<p>Roles: ${user.role}</p>
 
 </body>
 </html>

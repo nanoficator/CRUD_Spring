@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 @Controller
@@ -45,12 +44,21 @@ public class UserController {
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.GET)
     public ModelAndView addPage() {
+        List<Role> allRoles = roleService.getAllRoles();
         ModelAndView addPage = new ModelAndView("addPage");
+        addPage.addObject("allRoles", allRoles);
         return addPage;
     }
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute("user") User user) {
+    public ModelAndView addUser(@ModelAttribute("user") User user,
+                                @ModelAttribute("roles") HashSet<String> roles) {
+        Iterator<String> iterator = roles.iterator();
+        Set<Role> userRoles = new HashSet<>();
+        while (iterator.hasNext()) {
+            userRoles.add(roleService.getRoleByName(iterator.next()));
+        }
+        user.setRoles(userRoles);
         String result = userService.addUser(user);
         ModelAndView addPage = new ModelAndView("addPage");
         if (result.contains("Error:")) {

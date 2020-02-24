@@ -10,12 +10,12 @@ import java.util.List;
 public class UserServiceImp implements UserService {
 
     @Autowired
-    UserDao dao;
+    UserDao userDao;
 
     @Override
     public List<User> getAllUsers() {
         try {
-            return dao.getAllData();
+            return userDao.getAllData();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -25,7 +25,7 @@ public class UserServiceImp implements UserService {
     @Override
     public void deleteAllUsers() {
         try {
-            dao.deleteAllData();
+            userDao.deleteAllData();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -34,7 +34,7 @@ public class UserServiceImp implements UserService {
     @Override
     public boolean isExistUsername(String username) {
         try{
-            User userFromDB = dao.getDataByUsername(username);
+            User userFromDB = userDao.getDataByUsername(username);
             if (userFromDB != null) {
                 return true;
             }
@@ -48,7 +48,7 @@ public class UserServiceImp implements UserService {
     @Override
     public User getUserByID(Long id) {
         try {
-            return dao.getDataByID(id);
+            return userDao.getDataByID(id);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -58,7 +58,7 @@ public class UserServiceImp implements UserService {
     @Override
     public User getUserByUsername(String username) {
         try {
-            return dao.getDataByUsername(username);
+            return userDao.getDataByUsername(username);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -77,7 +77,7 @@ public class UserServiceImp implements UserService {
         }
 
         try {
-            dao.addData(user);
+            userDao.addData(user);
             return "User was added!";
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,7 +94,7 @@ public class UserServiceImp implements UserService {
         }
 
         try {
-            dao.deleteData(userFromDB);
+            userDao.deleteData(userFromDB);
             return "User was deleted!";
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,8 +124,8 @@ public class UserServiceImp implements UserService {
         }
 
         try {
-            dao.changeUsername(id, newUserName);
-            dao.changePassword(id, newPassword);
+            userDao.changeUsername(id, newUserName);
+            userDao.changePassword(id, newPassword);
             return "Changes saved!";
         } catch (SQLException e) {
             e.printStackTrace();

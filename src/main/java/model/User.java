@@ -1,7 +1,6 @@
 package model;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -22,9 +21,10 @@ public class User {
     @Transient
     private String confirmPassword;
 
-    @ManyToOne
+    @Column
+    @ManyToMany
     @JoinTable (name = "roles", inverseJoinColumns = @JoinColumn (name = "role_id"))
-    private Role role;
+    private Set<Role> roles;
 
     public User() {
     }
@@ -61,11 +61,11 @@ public class User {
         this.confirmPassword = confirmPassword;
     }
 
-    public Role getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

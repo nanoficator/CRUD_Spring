@@ -20,8 +20,8 @@
     <p>Password: <input type="password" name="password" value="${user.password}" required></p>
     <p>Confirm password: <input type="password" name="confirmPassword" value="${user.confirmPassword}" required></p>
     <p>Role:
-        <input type="checkbox" name="admin" value="${user.role}">ADMIN
-        <input type="checkbox" name="user" value="${user.role}">USER</p>
+        <input type="checkbox" name="admin" value="${"admin"}">ADMIN
+        <input type="checkbox" name="user" value="user">${"user"}</p>
     <p>Create new user: <input type="submit" name="SUBMIT">
 </form>
 

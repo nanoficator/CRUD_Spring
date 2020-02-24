@@ -15,7 +15,8 @@ public class Role {
     @Column
     private String name;
 
-    @OneToMany (mappedBy = "role")
+    @Column
+    @ManyToMany (mappedBy = "roles")
     private Set<User> users;
 
     public Role() {
