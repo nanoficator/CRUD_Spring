@@ -1,6 +1,8 @@
 package config;
 
 import controller.UserController;
+import dao.RoleDao;
+import dao.RoleDaoHibernate;
 import dao.UserDao;
 import dao.UserDaoHibernate;
 
@@ -46,6 +48,11 @@ public class WebConfig {
     @Bean
     UserDao userDao() {
         return new UserDaoHibernate(dbHelper().getConfiguration());
+    }
+
+    @Bean
+    RoleDao roleDao() {
+        return new RoleDaoHibernate(dbHelper().getConfiguration());
     }
 
     @Bean

@@ -51,14 +51,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute("user") User user,
-                                @ModelAttribute("roles") HashSet<String> roles) {
-        Iterator<String> iterator = roles.iterator();
-        Set<Role> userRoles = new HashSet<>();
-        while (iterator.hasNext()) {
-            userRoles.add(roleService.getRoleByName(iterator.next()));
-        }
-        user.setRoles(userRoles);
+        public ModelAndView addUser(@ModelAttribute("user") User user,
+                @ModelAttribute("roleAdmin") Role roleAdmin,
+                @ModelAttribute("roleUser") Role roleUser) {
+
         String result = userService.addUser(user);
         ModelAndView addPage = new ModelAndView("addPage");
         if (result.contains("Error:")) {

@@ -20,7 +20,8 @@ public class RoleServiceImpl implements RoleService {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
-        }    }
+        }
+    }
 
     @Override
     public void deleteAllRoles() {

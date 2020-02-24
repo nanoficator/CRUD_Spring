@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,7 +18,7 @@ public class Role {
 
     @Column
     @ManyToMany (mappedBy = "roles")
-    private Set<User> users;
+    private List<User> users;
 
     public Role() {
     }
@@ -38,11 +39,11 @@ public class Role {
         this.name = roleName;
     }
 
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 }
