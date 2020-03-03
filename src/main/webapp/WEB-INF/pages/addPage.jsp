@@ -21,11 +21,9 @@
     <p>Confirm password: <input type="password" name="confirmPassword" value="${user.confirmPassword}" required></p>
     <p>Role:
     <c:forEach var="role" items="${allRoles}">
-        <div class="divClass">
         <input type="checkbox" name="${role.name}" value="${role.name}" id="${role.id}">
         <label for="${role.id}">${role.name}</label>
-        </div>
-        </c:forEach>
+    </c:forEach>
     <p>Create new user: <input type="submit" name="SUBMIT">
 </form>
 

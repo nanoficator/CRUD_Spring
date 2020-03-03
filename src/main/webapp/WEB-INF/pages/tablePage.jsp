@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
   Created by IntelliJ IDEA.
   User: Mikhail Kuzivanov
@@ -29,7 +29,11 @@
                 <tr>
                     <td>${user.id}</td>
                     <td>${user.username}</td>
-                    <td></td>
+                    <td>
+                        <c:forEach var="role" items="${user.roles}">
+                            <p>${role.name}</p>
+                        </c:forEach>
+                    </td>
                     <td><a href=/admin/delete?id=${user.id}>Delete</a> / <a href=/admin/edit?id=${user.id}>Edit</a> / <a href=/user/info?id=${user.id}>Info</a></td>
                 </tr>
                 </c:forEach>

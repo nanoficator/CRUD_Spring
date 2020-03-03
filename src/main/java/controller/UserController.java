@@ -110,13 +110,22 @@ public class UserController {
     @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
     public ModelAndView editPage(@ModelAttribute("id") Long id) {
         User userForEdit = userService.getUserByID(id);
+        userForEdit.setConfirmPassword(userForEdit.getPassword());
+        List<Role> allRoles = roleService.getAllRoles();
         ModelAndView editPage = new ModelAndView("editPage");
         editPage.addObject("user", userForEdit);
+        editPage.addObject("allRoles", allRoles);
         return editPage;
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
-    public ModelAndView editUser(@ModelAttribute("user") User userChanged) {
+    public ModelAndView editUser(@ModelAttribute("user") User userChanged,
+                                 @ModelAttribute("ROLE_ADMIN") String roleAdmin,
+                                 @ModelAttribute("ROLE_USER") String roleUser) {
+        List<Role> userRoles = new ArrayList<>();
+        userRoles.add(roleService.getRoleByName(roleAdmin));
+        userRoles.add(roleService.getRoleByName(roleUser));
+        userChanged.setRoles(userRoles);
         String result = userService.changeUser(userChanged);
         ModelAndView editPage = new ModelAndView("editPage");
         if (result.contains("Error:")) {
