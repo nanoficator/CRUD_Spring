@@ -1,5 +1,6 @@
 package dao;
 
+import model.Role;
 import model.User;
 
 import java.sql.SQLException;
@@ -22,5 +23,7 @@ public interface UserDao {
     void changeUsername(Long id, String newUsername) throws SQLException;
 
     void changePassword(Long id, String newPassword) throws SQLException;
+
+    void changeRoles(Long id, List<Role> newRoles);
 
 }

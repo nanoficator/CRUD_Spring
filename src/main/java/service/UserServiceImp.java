@@ -1,6 +1,7 @@
 package service;
 
 import dao.UserDao;
+import model.Role;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -107,6 +108,7 @@ public class UserServiceImp implements UserService {
         Long id = changedUser.getId();
         String newUserName = changedUser.getUsername();
         String newPassword = changedUser.getPassword();
+        List<Role> newRoles = changedUser.getRoles();
 
         User userFromDBById = getUserByID(id);
         User userFromDBByUserName = getUserByUsername(newUserName);
@@ -126,6 +128,7 @@ public class UserServiceImp implements UserService {
         try {
             userDao.changeUsername(id, newUserName);
             userDao.changePassword(id, newPassword);
+            userDao.changeRoles(id, newRoles);
             return "Changes saved!";
         } catch (SQLException e) {
             e.printStackTrace();

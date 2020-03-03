@@ -1,5 +1,6 @@
 package dao;
 
+import model.Role;
 import model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -120,4 +121,15 @@ public class UserDaoHibernate implements UserDao {
         session.close();
     }
 
+    @Override
+    public void changeRoles(Long id, List<Role> newRoles) {
+        Session session = getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("UPDATE User SET roles = :roles WHERE id = :id");
+        query.setParameter("roles", newRoles);
+        query.setParameter("id", id);
+        query.executeUpdate();
+        transaction.commit();
+        session.close();
+    }
 }
