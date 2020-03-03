@@ -20,8 +20,12 @@
     <p>Password: <input type="password" name="password" value="${user.password}" required></p>
     <p>Confirm password: <input type="password" name="confirmPassword" value="${user.confirmPassword}" required></p>
     <p>Role:
-        <input type="checkbox" name="admin" value="${roleAdmin.name}">ADMIN
-        <input type="checkbox" name="user" value="${roleUser.name}" >USER</p>
+    <c:forEach var="role" items="${allRoles}">
+        <div class="divClass">
+        <input type="checkbox" name="${role.name}" value="${role.name}" id="${role.id}">
+        <label for="${role.id}">${role.name}</label>
+        </div>
+        </c:forEach>
     <p>Create new user: <input type="submit" name="SUBMIT">
 </form>
 

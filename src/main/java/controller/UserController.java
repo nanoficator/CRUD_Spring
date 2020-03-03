@@ -52,9 +52,12 @@ public class UserController {
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
         public ModelAndView addUser(@ModelAttribute("user") User user,
-                @ModelAttribute("roleAdmin") Role roleAdmin,
-                @ModelAttribute("roleUser") Role roleUser) {
-
+                @ModelAttribute("ROLE_ADMIN") String roleAdmin,
+                @ModelAttribute("ROLE_USER") String roleUser) {
+        List<Role> userRoles = new ArrayList<>();
+        userRoles.add(roleService.getRoleByName(roleAdmin));
+        userRoles.add(roleService.getRoleByName(roleUser));
+        user.setRoles(userRoles);
         String result = userService.addUser(user);
         ModelAndView addPage = new ModelAndView("addPage");
         if (result.contains("Error:")) {
