@@ -1,7 +1,6 @@
 package service;
 
 import model.Role;
-import model.User;
 
 import java.util.List;
 

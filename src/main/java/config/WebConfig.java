@@ -6,9 +6,6 @@ import dao.RoleDaoHibernate;
 import dao.UserDao;
 import dao.UserDaoHibernate;
 
-import model.Role;
-import model.User;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -63,5 +60,10 @@ public class WebConfig {
     @Bean
     RoleService roleService() {
         return new RoleServiceImpl();
+    }
+
+    @Bean
+    WebSecurity webSecurity() {
+        return new WebSecurity();
     }
 }

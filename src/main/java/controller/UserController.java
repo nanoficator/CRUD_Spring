@@ -29,8 +29,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView authUser(@ModelAttribute ("userName") String userName, @ModelAttribute ("password") String password) {
-        User user = userService.getUserByUsername(userName);
+    public ModelAndView authUser(@ModelAttribute ("user") User user) {
+        User userFromDB = userService.getUserByUsername(user.getUsername());
         ModelAndView authPage = new ModelAndView("authPage");
         return authPage;
     }

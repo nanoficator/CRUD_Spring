@@ -13,8 +13,8 @@
 <body>
 
 <form action="/login" method="post">
-    <p>Username: <input type="text" name="userName" required></p>
-    <p>Password: <input type="password" name="password" required></p>
+    <p>Username: <input type="text" name="username" value="${user.username}" required></p>
+    <p>Password: <input type="password" name="password" value="${user.password}" required></p>
     <p><input type="submit" value="SIGN IN"></p>
 </form>
 
