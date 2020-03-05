@@ -46,4 +46,19 @@ public class Role {
     public void setUsers(List<User> users) {
         this.users = users;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Role objRole = (Role) obj;
+        if (this.id.equals(objRole.id) && this.name.equals(objRole.name)) {
+            return true;
+        }
+        return false;
+    }
 }

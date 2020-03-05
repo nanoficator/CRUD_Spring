@@ -23,7 +23,12 @@
     <p>Confirm password: <input type="password" name="confirmPassword" value="${user.confirmPassword}" required></p>
     <p>Role:
         <c:forEach var="role" items="${allRoles}">
-            <input type="checkbox" name="${role.name}" value="${role.name}" id="${role.id}">
+            <c:if test="${user.roles.contains(role) == true}">
+                <input type="checkbox" name="${role.name}" value="${role.name}" id="${role.id}" checked>
+            </c:if>
+            <c:if test="${user.roles.contains(role) == false}">
+                <input type="checkbox" name="${role.name}" value="${role.name}" id="${role.id}">
+            </c:if>
             <label for="${role.id}">${role.name}</label>
         </c:forEach>
     <p>Create new user: <input type="submit" name="SUBMIT">
