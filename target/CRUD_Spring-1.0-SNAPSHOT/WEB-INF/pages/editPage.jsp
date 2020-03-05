@@ -31,7 +31,7 @@
             </c:if>
             <label for="${role.id}">${role.name}</label>
         </c:forEach>
-    <p>Create new user: <input type="submit" name="SUBMIT">
+    <p>Change user: <input type="submit" name="SUBMIT">
 </form>
 
 </body>
