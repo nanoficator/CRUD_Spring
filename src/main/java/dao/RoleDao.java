@@ -20,5 +20,5 @@ public interface RoleDao {
 
     Role getDataByName(String name) throws SQLException;
 
-    void updateRole(Role role) throws SQLException;
+    void updateData(Role role) throws SQLException;
 }

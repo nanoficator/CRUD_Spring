@@ -98,7 +98,7 @@ public class RoleDaoHibernate implements RoleDao {
     }
 
     @Override
-    public void updateRole(Role changedRole) throws SQLException {
+    public void updateData(Role changedRole) throws SQLException {
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.update(changedRole);

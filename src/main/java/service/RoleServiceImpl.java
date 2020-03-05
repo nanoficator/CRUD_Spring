@@ -2,7 +2,6 @@ package service;
 
 import dao.RoleDao;
 import model.Role;
-import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.SQLException;
@@ -117,7 +116,7 @@ public class RoleServiceImpl implements RoleService {
         }
 
         try {
-            roleDao.updateRole(changedRole);
+            roleDao.updateData(changedRole);
             return "Changes saved!";
         } catch (SQLException e) {
             e.printStackTrace();
