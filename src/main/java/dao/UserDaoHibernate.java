@@ -10,6 +10,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserDaoHibernate implements UserDao {
@@ -97,38 +98,12 @@ public class UserDaoHibernate implements UserDao {
         return userFromDB;
     }
 
-    @Override
-    public void changeUsername(Long id, String newUsername) {
-        Session session = getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("UPDATE User SET username = :newUsername WHERE id = :id");
-        query.setParameter("newUsername", newUsername);
-        query.setParameter("id", id);
-        query.executeUpdate();
-        transaction.commit();
-        session.close();
-    }
 
     @Override
-    public void changePassword(Long id, String newPassword) {
+    public void updateData(User user) throws SQLException {
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("UPDATE User SET password = :password WHERE id = :id");
-        query.setParameter("password", newPassword);
-        query.setParameter("id", id);
-        query.executeUpdate();
-        transaction.commit();
-        session.close();
-    }
-
-    @Override
-    public void changeRoles(Long id, List<Role> newRoles) {
-        Session session = getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("UPDATE User SET roles = :roles WHERE id = :id");
-        query.setParameter("roles", newRoles);
-        query.setParameter("id", id);
-        query.executeUpdate();
+        session.update(user);
         transaction.commit();
         session.close();
     }

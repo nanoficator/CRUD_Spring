@@ -98,13 +98,10 @@ public class RoleDaoHibernate implements RoleDao {
     }
 
     @Override
-    public void changeName(Long id, String newName) throws SQLException {
+    public void updateRole(Role changedRole) throws SQLException {
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("UPDATE Role SET name = :newName WHERE id = :id");
-        query.setParameter("newUsername", newName);
-        query.setParameter("id", id);
-        query.executeUpdate();
+        session.update(changedRole);
         transaction.commit();
         session.close();
     }

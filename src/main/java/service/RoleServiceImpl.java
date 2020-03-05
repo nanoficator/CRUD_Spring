@@ -97,9 +97,9 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public String changeRole(User changedRole) {
+    public String changeRole(Role changedRole) {
         Long id = changedRole.getId();
-        String newName = changedRole.getUsername();
+        String newName = changedRole.getName();
 
         Role roleFromDBById = getRoleByID(id);
         Role roleFromDBByName = getRoleByName(newName);
@@ -117,7 +117,7 @@ public class RoleServiceImpl implements RoleService {
         }
 
         try {
-            roleDao.changeName(id, newName);
+            roleDao.updateRole(changedRole);
             return "Changes saved!";
         } catch (SQLException e) {
             e.printStackTrace();

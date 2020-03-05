@@ -126,9 +126,7 @@ public class UserServiceImp implements UserService {
         }
 
         try {
-            userDao.changeUsername(id, newUserName);
-            userDao.changePassword(id, newPassword);
-            userDao.changeRoles(id, newRoles);
+            userDao.updateData(changedUser);
             return "Changes saved!";
         } catch (SQLException e) {
             e.printStackTrace();

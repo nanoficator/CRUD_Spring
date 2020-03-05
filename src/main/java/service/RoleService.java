@@ -21,6 +21,6 @@ public interface RoleService {
 
     String deleteRole(Long id);
 
-    String changeRole(User changedRole);
+    String changeRole(Role changedRole);
 
 }
