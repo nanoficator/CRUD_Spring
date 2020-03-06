@@ -61,9 +61,4 @@ public class WebConfig {
     RoleService roleService() {
         return new RoleServiceImpl();
     }
-
-    @Bean
-    WebSecurity webSecurity() {
-        return new WebSecurity();
-    }
 }
