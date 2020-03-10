@@ -1,5 +1,6 @@
 package config;
 
+import controller.UserController;
 import dao.RoleDaoHibernate;
 import dao.UserDaoHibernate;
 import org.springframework.context.annotation.Bean;
@@ -44,5 +45,10 @@ public class AppConfig {
     @Bean
     RoleDaoHibernate roleDaoHibernate() {
         return new RoleDaoHibernate(dbHelper().getConfiguration());
+    }
+
+    @Bean
+    UserController  userController() {
+        return new UserController();
     }
 }
