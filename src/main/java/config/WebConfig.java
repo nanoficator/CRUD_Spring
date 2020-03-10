@@ -21,9 +21,4 @@ public class WebConfig {
         return viewResolver;
     }
 
-    @Bean
-    UserController userController() {
-        return new UserController();
-    }
-
 }

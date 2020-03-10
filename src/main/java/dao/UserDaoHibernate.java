@@ -18,11 +18,8 @@ public class UserDaoHibernate implements UserDao {
 
     private static Configuration configuration;
 
-    @Autowired
-    DBHelper dbHelper;
-
-    public UserDaoHibernate() {
-        this.configuration = dbHelper.getConfiguration();
+    public UserDaoHibernate(Configuration configuration) {
+        this.configuration = configuration;
     }
 
     private static SessionFactory sessionFactory;

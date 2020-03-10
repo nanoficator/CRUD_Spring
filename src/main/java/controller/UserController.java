@@ -18,11 +18,11 @@ import java.util.*;
 public class UserController {
 
     @Autowired
-    @Qualifier("UserServiceImp")
+    @Qualifier("userServiceImp")
     UserService userService;
 
     @Autowired
-    @Qualifier("RoleServiceImp")
+    @Qualifier("roleServiceImp")
     RoleService roleService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

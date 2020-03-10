@@ -11,7 +11,7 @@ import java.util.List;
 public class UserServiceImp implements UserService {
 
     @Autowired
-    @Qualifier("UserDaoHibernate")
+    @Qualifier("userDaoHibernate")
     UserDao userDao;
 
     @Override
