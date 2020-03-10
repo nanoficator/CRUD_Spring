@@ -8,6 +8,8 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.springframework.beans.factory.annotation.Autowired;
+import util.DBHelper;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,8 +18,11 @@ public class RoleDaoHibernate implements RoleDao {
 
     private static Configuration configuration;
 
-    public RoleDaoHibernate(Configuration configuration) {
-        this.configuration = configuration;
+    @Autowired
+    DBHelper dbHelper;
+
+    public RoleDaoHibernate() {
+        this.configuration = dbHelper.getConfiguration();
     }
 
     private static SessionFactory sessionFactory;

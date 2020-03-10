@@ -3,6 +3,7 @@ package controller;
 import model.Role;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import service.RoleService;
 import service.UserService;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,11 @@ import java.util.*;
 public class UserController {
 
     @Autowired
+    @Qualifier("UserServiceImp")
     UserService userService;
 
     @Autowired
+    @Qualifier("RoleServiceImp")
     RoleService roleService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
