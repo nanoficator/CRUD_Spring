@@ -23,5 +23,16 @@
     </ul>
 </p>
 
+<p>
+<c:forEach var="role" items="${user.roles}">
+    <c:if test="${role.equals(allRoles.get(0))}">
+        <a href=/admin/table>Table</a>
+    </c:if>
+    <c:if test="${role.equals(allRoles.get(1))}">
+        <a href=/logout>LOGOUT</a>
+    </c:if>
+</c:forEach>
+</p>
+
 </body>
 </html>

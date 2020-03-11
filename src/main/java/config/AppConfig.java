@@ -3,12 +3,12 @@ package config;
 import controller.UserController;
 import dao.RoleDaoHibernate;
 import dao.UserDaoHibernate;
+import model.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import service.RoleServiceImp;
-import service.UserDetailsServiceImp;
 import service.UserServiceImp;
 import util.DBHelper;
 
@@ -18,6 +18,11 @@ import util.DBHelper;
 public class AppConfig {
 
     @Bean
+    User user() {
+        return new User();
+    }
+
+    @Bean
     DBHelper dbHelper() {
         return new DBHelper();
     }
@@ -25,11 +30,6 @@ public class AppConfig {
     @Bean
     UserServiceImp userServiceImp() {
         return new UserServiceImp();
-    }
-
-    @Bean
-    UserDetailsServiceImp userDetailsServiceImp() {
-        return new UserDetailsServiceImp();
     }
 
     @Bean
@@ -50,5 +50,10 @@ public class AppConfig {
     @Bean
     UserController  userController() {
         return new UserController();
+    }
+
+    @Bean
+    SecurityHandler securityHandler() {
+        return new SecurityHandler();
     }
 }

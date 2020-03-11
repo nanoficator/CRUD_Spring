@@ -4,11 +4,14 @@ import dao.UserDao;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserServiceImp implements UserService {
+public class UserServiceImp implements UserService, UserDetailsService {
 
     @Autowired
     @Qualifier("userDaoHibernate")
@@ -131,6 +134,18 @@ public class UserServiceImp implements UserService {
         } catch (SQLException e) {
             e.printStackTrace();
             return "Error: SQL Exception!";
+        }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        try {
+            User user = userDao.getDataByUsername(s);
+            user.setPassword("{noop}" + user.getPassword());
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

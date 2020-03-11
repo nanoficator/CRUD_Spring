@@ -4,7 +4,6 @@ import model.Role;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import service.RoleService;
 import service.UserService;
 import org.springframework.stereotype.Controller;
@@ -25,13 +24,6 @@ public class UserController {
     @Autowired
     @Qualifier("roleServiceImp")
     RoleService roleService;
-
-    @RequestMapping(value = "/result", method = RequestMethod.GET)
-    public ModelAndView resultPage(@ModelAttribute("message") String message) {
-        ModelAndView resultPage = new ModelAndView("resultPage");
-        resultPage.addObject("message", message);
-        return resultPage;
-    }
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.GET)
     public ModelAndView addPage() {
@@ -128,9 +120,10 @@ public class UserController {
         return editPage;
     }
 
-    @RequestMapping(value = "/admin/result", method = RequestMethod.GET)
-    public ModelAndView resultUser() {
+    @RequestMapping(value = "/result", method = RequestMethod.GET)
+    public ModelAndView resultPage(@ModelAttribute("message") String message) {
         ModelAndView resultPage = new ModelAndView("resultPage");
+        resultPage.addObject("message", message);
         return resultPage;
     }
 
@@ -145,12 +138,14 @@ public class UserController {
     @RequestMapping(value = "/user/info", method = RequestMethod.GET)
     public ModelAndView infoPage(@ModelAttribute ("id") Long id) {
         User user = userService.getUserByID(id);
+        List<Role> allRoles = roleService.getAllRoles();
         ModelAndView infoPage = new ModelAndView("infoPage");
         if (user == null) {
             infoPage.setViewName("redirect:/result");
             infoPage.addObject("message", "Error: User with ID = " + id + " does not exist!");
         } else {
             infoPage.addObject("user", user);
+            infoPage.addObject("allRoles", allRoles);
         }
         return infoPage;
     }
