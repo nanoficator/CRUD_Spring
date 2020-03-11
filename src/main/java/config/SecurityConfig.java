@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @ComponentScan
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -29,7 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .formLogin()
             .and()
-                .logout();
+                .logout()
+            .and()
+                .csrf().disable();
     }
 
     @Autowired
@@ -38,6 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService());
+        auth.userDetailsService(userDetailsService);
     }
 }

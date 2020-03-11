@@ -4,6 +4,7 @@ import model.Role;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import service.RoleService;
 import service.UserService;
 import org.springframework.stereotype.Controller;
@@ -24,19 +25,6 @@ public class UserController {
     @Autowired
     @Qualifier("roleServiceImp")
     RoleService roleService;
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView authPage() {
-        ModelAndView authPage = new ModelAndView("authPage");
-        return authPage;
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView authUser(@ModelAttribute ("user") User user) {
-        User userFromDB = userService.getUserByUsername(user.getUsername());
-        ModelAndView authPage = new ModelAndView("authPage");
-        return authPage;
-    }
 
     @RequestMapping(value = "/result", method = RequestMethod.GET)
     public ModelAndView resultPage(@ModelAttribute("message") String message) {
