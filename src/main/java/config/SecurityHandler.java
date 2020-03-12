@@ -5,7 +5,6 @@ import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import service.RoleService;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class SecurityHandler implements AuthenticationSuccessHandler {
@@ -39,7 +37,11 @@ public class SecurityHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         User user = (User) authentication.getPrincipal();
         List<Role> roles = user.getRoles();
-        Long id = userService.getUserByUsername(user.getUsername()).getId();
-        httpServletResponse.sendRedirect("/user/info?id=" + id);
+        if (roles.contains(roleService.getRoleByName("ROLE_ADMIN"))) {
+            httpServletResponse.sendRedirect("/admin/table");
+        } else if (roles.contains(roleService.getRoleByName("ROLE_USER"))) {
+            Long id = userService.getUserByUsername(user.getUsername()).getId();
+            httpServletResponse.sendRedirect("/user/info?id=" + id);
+        }
     }
 }

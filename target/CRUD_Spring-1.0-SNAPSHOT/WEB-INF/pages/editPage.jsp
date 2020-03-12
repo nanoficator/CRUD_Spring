@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<a href=/admin/table>Back to table</a>
+<p><a href=/admin/table>Back to table</a></p>
 
 
 <form action="/admin/edit/" method="post">

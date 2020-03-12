@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.preauth.x509.X509PrincipalExtractor;
 
 @Configuration
 @EnableWebSecurity
@@ -21,11 +22,17 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    @Qualifier("userServiceImp")
+    UserDetailsService userDetailsService;
+
+    @Autowired
     @Qualifier("securityHandler")
     AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+
         http
                 .authorizeRequests()
                 .antMatchers("/admin/*")
@@ -33,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .authorizeRequests()
                 .antMatchers("/user/*")
-                .hasRole("USER")
+                .hasAnyRole("USER", "ADMIN")
             .and()
                 .formLogin()
                 .successHandler(authenticationSuccessHandler)
@@ -42,10 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .csrf().disable();
     }
-
-    @Autowired
-    @Qualifier("userServiceImp")
-    UserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

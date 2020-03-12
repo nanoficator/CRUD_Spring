@@ -14,6 +14,8 @@
 </head>
 <body>
 
+<a href=/logout>Logout</a>
+
 <table border="0">
     <tr>
         <td>
@@ -51,8 +53,6 @@
     </tr>
 
 </table>
-
-<a href=/logout>Logout</a>
 
 </body>
 </html>

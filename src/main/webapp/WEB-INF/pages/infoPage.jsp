@@ -13,6 +13,9 @@
 </head>
 <body>
 
+<p><a href=/logout>LOGOUT</a></p>
+<p><a href=/admin/table>Table</a> (Only for admins)</p>
+
 <p>ID: ${user.id}</p>
 <p>Username: ${user.username}</p>
 <p>Roles:
@@ -21,17 +24,6 @@
             <li>${role.name}</li>
         </c:forEach>
     </ul>
-</p>
-
-<p>
-<c:forEach var="role" items="${user.roles}">
-    <c:if test="${role.equals(allRoles.get(0))}">
-        <a href=/admin/table>Table</a>
-    </c:if>
-    <c:if test="${role.equals(allRoles.get(1))}">
-        <a href=/logout>LOGOUT</a>
-    </c:if>
-</c:forEach>
 </p>
 
 </body>

@@ -13,6 +13,9 @@
 </head>
 <body>
 
+<p><a href=/logout>LOGOUT</a></p>
+<p><a href=/admin/table>Table</a> (Only for admins)</p>
+
 <p>ID: ${user.id}</p>
 <p>Username: ${user.username}</p>
 <p>Roles:
