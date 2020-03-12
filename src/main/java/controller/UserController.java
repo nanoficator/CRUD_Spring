@@ -28,10 +28,6 @@ public class UserController {
     @Qualifier("roleServiceImp")
     RoleService roleService;
 
-    @Autowired
-    @Qualifier("securityHandler")
-    AuthenticationSuccessHandler authenticationSuccessHandler;
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView defaultPage() {
         ModelAndView defaultPage = new ModelAndView();
