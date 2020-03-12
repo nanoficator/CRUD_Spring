@@ -1,4 +1,4 @@
-package config;
+package security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan
+@ComponentScan("config")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

@@ -1,4 +1,4 @@
-package config;
+package security;
 
 import model.Role;
 import model.User;

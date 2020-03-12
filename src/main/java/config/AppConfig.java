@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import security.SecurityHandler;
 import service.RoleServiceImp;
 import service.UserServiceImp;
 
@@ -17,10 +18,14 @@ import service.UserServiceImp;
 @ComponentScan
 public class AppConfig {
 
+    //    package "model"
+
     @Bean
     public User user() {
         return new User();
     }
+
+    //    package "dao"
 
     @Bean
     public org.hibernate.cfg.Configuration getConfiguration() {
@@ -38,16 +43,6 @@ public class AppConfig {
     }
 
     @Bean
-    public UserServiceImp userServiceImp() {
-        return new UserServiceImp();
-    }
-
-    @Bean
-    public RoleServiceImp roleServiceImp() {
-        return new RoleServiceImp();
-    }
-
-    @Bean
     public UserDaoHibernate userDaoHibernate() {
         return new UserDaoHibernate(getConfiguration());
     }
@@ -57,10 +52,26 @@ public class AppConfig {
         return new RoleDaoHibernate(getConfiguration());
     }
 
+    //    package "service"
+
+    @Bean
+    public UserServiceImp userServiceImp() {
+        return new UserServiceImp();
+    }
+
+    @Bean
+    public RoleServiceImp roleServiceImp() {
+        return new RoleServiceImp();
+    }
+
+    //    package "controller"
+
     @Bean
     public UserController  userController() {
         return new UserController();
     }
+
+    //    package "security"
 
     @Bean
     public SecurityHandler securityHandler() {
