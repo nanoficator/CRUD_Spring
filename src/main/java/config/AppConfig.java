@@ -18,12 +18,12 @@ import service.UserServiceImp;
 public class AppConfig {
 
     @Bean
-    User user() {
+    public User user() {
         return new User();
     }
 
     @Bean
-    org.hibernate.cfg.Configuration getConfiguration() {
+    public org.hibernate.cfg.Configuration getConfiguration() {
         org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration();
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Role.class);
@@ -38,32 +38,32 @@ public class AppConfig {
     }
 
     @Bean
-    UserServiceImp userServiceImp() {
+    public UserServiceImp userServiceImp() {
         return new UserServiceImp();
     }
 
     @Bean
-    RoleServiceImp roleServiceImp() {
+    public RoleServiceImp roleServiceImp() {
         return new RoleServiceImp();
     }
 
     @Bean
-    UserDaoHibernate userDaoHibernate() {
+    public UserDaoHibernate userDaoHibernate() {
         return new UserDaoHibernate(getConfiguration());
     }
 
     @Bean
-    RoleDaoHibernate roleDaoHibernate() {
+    public RoleDaoHibernate roleDaoHibernate() {
         return new RoleDaoHibernate(getConfiguration());
     }
 
     @Bean
-    UserController  userController() {
+    public UserController  userController() {
         return new UserController();
     }
 
     @Bean
-    SecurityHandler securityHandler() {
+    public SecurityHandler securityHandler() {
         return new SecurityHandler();
     }
 }
