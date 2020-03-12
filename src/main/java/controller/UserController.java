@@ -4,6 +4,9 @@ import model.Role;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import service.RoleService;
 import service.UserService;
 import org.springframework.stereotype.Controller;
@@ -24,6 +27,10 @@ public class UserController {
     @Autowired
     @Qualifier("roleServiceImp")
     RoleService roleService;
+
+    @Autowired
+    @Qualifier("securityHandler")
+    AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView defaultPage() {
@@ -144,16 +151,22 @@ public class UserController {
 
     @RequestMapping(value = "/user/info", method = RequestMethod.GET)
     public ModelAndView infoPage(@ModelAttribute ("id") Long id) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.getUserByID(id);
+        boolean loggedInUserIsAdmin = loggedInUser.getRoles().contains(roleService.getRoleByName("ROLE_ADMIN"));
         List<Role> allRoles = roleService.getAllRoles();
         ModelAndView infoPage = new ModelAndView("infoPage");
         if (user == null) {
             infoPage.setViewName("redirect:/result");
             infoPage.addObject("message", "Error: User with ID = " + id + " does not exist!");
+        } else if (loggedInUser.getId() != user.getId() && !loggedInUserIsAdmin) {
+            infoPage.setStatus(HttpStatus.FORBIDDEN);
+            infoPage.setViewName("redirect:/user/info?id=" + loggedInUser.getId());
         } else {
             infoPage.addObject("user", user);
-            infoPage.addObject("allRoles", allRoles);
+            infoPage.addObject("loggedInUserIsAdmin", loggedInUserIsAdmin);
         }
         return infoPage;
+
     }
 }

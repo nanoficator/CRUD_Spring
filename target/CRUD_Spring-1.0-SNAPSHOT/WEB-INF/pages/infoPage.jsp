@@ -14,17 +14,21 @@
 <body>
 
 <p><a href=/logout>LOGOUT</a></p>
-<p><a href=/admin/table>Table</a> (Only for admins)</p>
+
+<c:if test="${loggedInUserIsAdmin}">
+    <p><a href=/admin/table>Back to Table</a></p>
+</c:if>
 
 <p>ID: ${user.id}</p>
 <p>Username: ${user.username}</p>
 <p>Roles:
-    <ul>
-        <c:forEach var="role" items="${user.roles}">
-            <li>${role.name}</li>
-        </c:forEach>
-    </ul>
+<ul>
+    <c:forEach var="role" items="${user.roles}">
+        <li>${role.name}</li>
+    </c:forEach>
+</ul>
 </p>
+
 
 </body>
 </html>

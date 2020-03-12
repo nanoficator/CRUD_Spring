@@ -4,6 +4,7 @@ import model.Role;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
+@Configuration
 public class SecurityHandler implements AuthenticationSuccessHandler {
 
     @Override
@@ -35,12 +37,12 @@ public class SecurityHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        User user = (User) authentication.getPrincipal();
-        List<Role> roles = user.getRoles();
+        User loggedInUser = (User) authentication.getPrincipal();
+        List<Role> roles = loggedInUser.getRoles();
         if (roles.contains(roleService.getRoleByName("ROLE_ADMIN"))) {
             httpServletResponse.sendRedirect("/admin/table");
         } else if (roles.contains(roleService.getRoleByName("ROLE_USER"))) {
-            Long id = userService.getUserByUsername(user.getUsername()).getId();
+            Long id = userService.getUserByUsername(loggedInUser.getUsername()).getId();
             httpServletResponse.sendRedirect("/user/info?id=" + id);
         }
     }
