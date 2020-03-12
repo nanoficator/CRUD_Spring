@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<a href=/logout>Logout</a>
+<a href=/logout>LOGOUT</a>
 
 <table border="0">
     <tr>

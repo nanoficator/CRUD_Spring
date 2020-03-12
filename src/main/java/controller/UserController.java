@@ -25,6 +25,13 @@ public class UserController {
     @Qualifier("roleServiceImp")
     RoleService roleService;
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView defaultPage() {
+        ModelAndView defaultPage = new ModelAndView();
+        defaultPage.setViewName("redirect:/login");
+        return defaultPage;
+    }
+
     @RequestMapping(value = "/admin/add", method = RequestMethod.GET)
     public ModelAndView addPage() {
         List<Role> allRoles = roleService.getAllRoles();
