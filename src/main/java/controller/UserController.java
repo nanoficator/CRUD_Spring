@@ -164,7 +164,6 @@ public class UserController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.getUserByID(id);
         boolean loggedInUserIsAdmin = loggedInUser.getRoles().contains(roleService.getRoleByName("ROLE_ADMIN"));
-        List<Role> allRoles = roleService.getAllRoles();
 
         ModelAndView infoPage = new ModelAndView("infoPage");
         if (user == null) {
