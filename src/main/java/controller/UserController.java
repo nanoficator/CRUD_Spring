@@ -51,11 +51,13 @@ public class UserController {
         public ModelAndView addUser(@ModelAttribute("user") User user,
                 @ModelAttribute("ROLE_ADMIN") String roleAdmin,
                 @ModelAttribute("ROLE_USER") String roleUser) {
+
         List<Role> userRoles = new ArrayList<>();
         userRoles.add(roleService.getRoleByName(roleAdmin));
         userRoles.add(roleService.getRoleByName(roleUser));
         user.setRoles(userRoles);
         String result = userService.addUser(user);
+
         ModelAndView addPage = new ModelAndView("addPage");
         if (result.contains("Error:")) {
             addPage.addObject("message", result);
@@ -64,6 +66,7 @@ public class UserController {
         }
         addPage.setViewName("redirect:/result");
         return addPage;
+
     }
 
     @RequestMapping(value = "/admin/delete", method = RequestMethod.GET)
@@ -106,24 +109,29 @@ public class UserController {
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
     public ModelAndView editPage(@ModelAttribute("id") Long id) {
+
         User userForEdit = userService.getUserByID(id);
         userForEdit.setConfirmPassword(userForEdit.getPassword());
         List<Role> allRoles = roleService.getAllRoles();
+
         ModelAndView editPage = new ModelAndView("editPage");
         editPage.addObject("user", userForEdit);
         editPage.addObject("allRoles", allRoles);
         return editPage;
+
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
     public ModelAndView editUser(@ModelAttribute("user") User userChanged,
                                  @ModelAttribute("ROLE_ADMIN") String roleAdmin,
                                  @ModelAttribute("ROLE_USER") String roleUser) {
+
         List<Role> userRoles = new ArrayList<>();
         userRoles.add(roleService.getRoleByName(roleAdmin));
         userRoles.add(roleService.getRoleByName(roleUser));
         userChanged.setRoles(userRoles);
         String result = userService.changeUser(userChanged);
+
         ModelAndView editPage = new ModelAndView("editPage");
         if (result.contains("Error:")) {
             editPage.addObject("message", result);
@@ -132,6 +140,7 @@ public class UserController {
         }
         editPage.setViewName("redirect:/result");
         return editPage;
+
     }
 
     @RequestMapping(value = "/result", method = RequestMethod.GET)
@@ -151,10 +160,12 @@ public class UserController {
 
     @RequestMapping(value = "/user/info", method = RequestMethod.GET)
     public ModelAndView infoPage(@ModelAttribute ("id") Long id) {
+
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.getUserByID(id);
         boolean loggedInUserIsAdmin = loggedInUser.getRoles().contains(roleService.getRoleByName("ROLE_ADMIN"));
         List<Role> allRoles = roleService.getAllRoles();
+
         ModelAndView infoPage = new ModelAndView("infoPage");
         if (user == null) {
             infoPage.setViewName("redirect:/result");
