@@ -25,6 +25,11 @@ public class AppConfig {
         return new User();
     }
 
+    @Bean
+    public Role role() {
+        return new Role();
+    }
+
     //    package "dao"
 
     @Bean
