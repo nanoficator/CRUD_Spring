@@ -3,15 +3,17 @@ package service;
 import dao.RoleDao;
 import model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Component
+@ComponentScan("dao")
 public class RoleServiceImp implements RoleService {
 
     @Autowired
-    @Qualifier("roleDaoHibernate")
     RoleDao roleDao;
 
     @Override

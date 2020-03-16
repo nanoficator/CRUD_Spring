@@ -3,7 +3,6 @@ package security;
 import model.Role;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -19,20 +18,16 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
-@Configuration
 public class SecurityHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
-
     }
 
     @Autowired
-    @Qualifier("userServiceImp")
     UserService userService;
 
     @Autowired
-    @Qualifier("roleServiceImp")
     RoleService roleService;
 
     @Override

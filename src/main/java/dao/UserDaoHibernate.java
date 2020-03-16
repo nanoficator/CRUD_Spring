@@ -8,14 +8,18 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Component
 public class UserDaoHibernate implements UserDao {
 
     private static Configuration configuration;
 
+    @Autowired
     public UserDaoHibernate(Configuration configuration) {
         this.configuration = configuration;
     }

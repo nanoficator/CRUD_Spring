@@ -3,7 +3,6 @@ package controller;
 import model.Role;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import service.RoleService;
@@ -20,11 +19,9 @@ import java.util.*;
 public class UserController {
 
     @Autowired
-    @Qualifier("userServiceImp")
     UserService userService;
 
     @Autowired
-    @Qualifier("roleServiceImp")
     RoleService roleService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
