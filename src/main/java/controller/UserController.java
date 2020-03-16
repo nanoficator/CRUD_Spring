@@ -41,8 +41,8 @@ public class UserController {
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
         public ModelAndView addUser(@ModelAttribute("user") User user,
-                @ModelAttribute("ROLE_ADMIN") String roleAdmin,
-                @ModelAttribute("ROLE_USER") String roleUser) {
+                                    @ModelAttribute("ROLE_ADMIN") String roleAdmin,
+                                    @ModelAttribute("ROLE_USER") String roleUser) {
 
         List<Role> userRoles = new ArrayList<>();
         userRoles.add(roleService.getRoleByName(roleAdmin));
