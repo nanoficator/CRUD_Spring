@@ -19,8 +19,8 @@
 <form action="/admin/edit/" method="post">
     <p>ID: <input type="text" name="id" value="${user.id}" readonly></p>
     <p>Username: <input type="text" name="username" value="${user.username}" required></p>
-    <p>Password: <input type="password" name="password" value="${user.password}" required></p>
-    <p>Confirm password: <input type="password" name="confirmPassword" value="${user.confirmPassword}" required></p>
+    <p>Password: <input type="password" name="password" value="${user.password}"></p>
+    <p>Confirm password: <input type="password" name="confirmPassword" value="${user.confirmPassword}"></p>
     <p>Role:
         <c:forEach var="role" items="${allRoles}">
             <c:if test="${user.roles.contains(role) == true}">

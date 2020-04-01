@@ -108,8 +108,9 @@ public class UserController {
     public ModelAndView editPage(@ModelAttribute("id") Long id) {
 
         User userForEdit = userService.getUserByID(id);
-        userForEdit.setConfirmPassword(userForEdit.getPassword());
         List<Role> allRoles = roleService.getAllRoles();
+        userForEdit.setPassword("");
+        userForEdit.setConfirmPassword("");
 
         ModelAndView editPage = new ModelAndView("editPage");
         editPage.addObject("user", userForEdit);

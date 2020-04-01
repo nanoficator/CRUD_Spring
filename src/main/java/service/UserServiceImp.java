@@ -117,16 +117,24 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
         Long id = changedUser.getId();
         String newUserName = changedUser.getUsername();
-        String newPassword = changedUser.getPassword();
 
         User userFromDBById = getUserByID(id);
         User userFromDBByUserName = getUserByUsername(newUserName);
+
+        if (changedUser.getPassword().equals("") && changedUser.getConfirmPassword().equals("")) {
+            changedUser.setPassword(userFromDBById.getPassword());
+        } else {
+            changedUser.setPassword(passwordEncoder.encode(changedUser.getPassword()));
+            if (!passwordEncoder.matches(changedUser.getConfirmPassword(), changedUser.getPassword())) {
+                return "Error: Passwords do not match!";
+            }
+        }
 
         if (userFromDBById == null) {
             return "Error: User does not exist!";
         }
 
-        if (id == null ||newUserName.equals("") || newPassword.equals("")) {
+        if (newUserName.equals("")) {
             return "Error: All fields are required!";
         }
 
