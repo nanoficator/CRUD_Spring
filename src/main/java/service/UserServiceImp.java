@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
@@ -18,6 +19,9 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> getAllUsers() {
@@ -79,7 +83,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
             return "Error: Username exists!";
         }
 
-        if (!user.getPassword().equals(user.getConfirmPassword())) {
+        if (!passwordEncoder.matches(user.getConfirmPassword(), user.getPassword())) {
             return "Error: Passwords do not match!";
         }
 
@@ -143,7 +147,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         try {
             User user = userDao.getDataByUsername(s);
-            user.setPassword("{noop}" + user.getPassword());
             return user;
         } catch (SQLException e) {
             e.printStackTrace();

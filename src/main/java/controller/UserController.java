@@ -5,6 +5,8 @@ import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import service.RoleService;
 import service.UserService;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class UserController {
 
     @Autowired
     RoleService roleService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView defaultPage() {
@@ -48,6 +53,7 @@ public class UserController {
         userRoles.add(roleService.getRoleByName(roleAdmin));
         userRoles.add(roleService.getRoleByName(roleUser));
         user.setRoles(userRoles);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         String result = userService.addUser(user);
 
         ModelAndView addPage = new ModelAndView("addPage");

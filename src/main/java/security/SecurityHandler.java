@@ -3,8 +3,8 @@ package security;
 import model.Role;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import service.RoleService;
@@ -29,6 +29,9 @@ public class SecurityHandler implements AuthenticationSuccessHandler {
 
     @Autowired
     RoleService roleService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
