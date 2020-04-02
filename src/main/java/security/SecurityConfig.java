@@ -41,9 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .successHandler(authenticationSuccessHandler)
             .and()
-                .logout()
-            .and()
-                .csrf().disable();
+                .logout();
     }
 
     @Override

@@ -26,6 +26,8 @@
         </c:forEach>
     </p>
     <p><input type="submit" name="SUBMIT" value="ADD USER"></p>
+
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 </form>
 
 </body>

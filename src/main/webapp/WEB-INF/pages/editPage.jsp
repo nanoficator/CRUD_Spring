@@ -32,6 +32,9 @@
             <label for="${role.id}">${role.name}</label>
         </c:forEach>
     <p><input type="submit" name="SUBMIT" value="CHANGE USER"></p>
+
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+
 </form>
 
 </body>

@@ -15,6 +15,7 @@
 <p>Are you sure to delete ${userName}?</p>
 <form action="/admin/delete?id=${id}" method="post">
     <button>YES</button>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 </form>
 
 <form action="/admin/table" method="get">
